@@ -1,0 +1,20 @@
+{
+  "dependencies": {
+    "browserify": "^14.4.0",
+    "cookies-js": "^1.2.3",
+    "gulp": "^3.9.1",
+    "gulp-babel": "^6.1.2",
+    "gulp-nodemon": "^2.2.1",
+    "hapi": "^16.5.0",
+    "nunjucks": "^3.0.1",
+    "run-sequence": "^2.1.0"
+  },
+  "devDependencies": {
+    "babelify": "^7.3.0",
+    "vinyl-source-stream": "^1.1.0"
+  },
+  "browser": {
+    "./src/index.js": "./src/index.client.js",
+    "./src/lib/index.js": "./src/lib/index.client.js"
+  }
+}
