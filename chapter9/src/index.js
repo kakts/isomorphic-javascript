@@ -2,6 +2,7 @@ import Hapi from 'hapi';
 import Application from './lib';
 import Controller from './lib/controller';
 import HelloController from './hello-controller';
+import HomeController from './HomeController';
 import nunjucks from 'nunjucks';
 
 const APP_FILE_PATH = '/application.js';
@@ -16,7 +17,7 @@ server.connection({
 // 描画やレスポンスの実装に関する詳細がアプリから取り除かれたため、
 // コードがはるかに読みやすくなった
 const application = new Application({
-  '/': Controller,
+  '/': HomeController,
   '/hello/{name*}': HelloController
 }, {
   server: server,

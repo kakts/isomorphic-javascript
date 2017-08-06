@@ -16,6 +16,10 @@ var _helloController = require('./hello-controller');
 
 var _helloController2 = _interopRequireDefault(_helloController);
 
+var _HomeController = require('./HomeController');
+
+var _HomeController2 = _interopRequireDefault(_HomeController);
+
 var _nunjucks = require('nunjucks');
 
 var _nunjucks2 = _interopRequireDefault(_nunjucks);
@@ -32,7 +36,7 @@ server.connection({
 // 描画やレスポンスの実装に関する詳細がアプリから取り除かれたため、
 // コードがはるかに読みやすくなった
 var application = new _lib2.default({
-  '/': _controller2.default,
+  '/': _HomeController2.default,
   '/hello/{name*}': _helloController2.default
 }, {
   server: server,

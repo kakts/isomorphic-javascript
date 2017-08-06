@@ -6,13 +6,9 @@ Object.defineProperty(exports, "__esModule", {
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _controller = require('./lib/controller');
+var _Controller2 = require('./lib/Controller');
 
-var _controller2 = _interopRequireDefault(_controller);
-
-var _nunjucks = require('nunjucks');
-
-var _nunjucks2 = _interopRequireDefault(_nunjucks);
+var _Controller3 = _interopRequireDefault(_Controller2);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -22,49 +18,34 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-_nunjucks2.default.configure('./dist');
+var HomeController = function (_Controller) {
+  _inherits(HomeController, _Controller);
 
-function getName(request) {
-  var name = {
-    fname: 'Rick',
-    lname: 'Sanchez'
-  };
+  function HomeController() {
+    _classCallCheck(this, HomeController);
 
-  var nameParts = request.params.name ? request.params.name.split('/') : [];
-
-  name.fname = nameParts[0] || request.query.fname || name.fname;
-  name.lname = nameParts[1] || request.query.lname || name.lname;
-  return name;
-}
-
-var HelloController = function (_Controller) {
-  _inherits(HelloController, _Controller);
-
-  function HelloController() {
-    _classCallCheck(this, HelloController);
-
-    return _possibleConstructorReturn(this, (HelloController.__proto__ || Object.getPrototypeOf(HelloController)).apply(this, arguments));
+    return _possibleConstructorReturn(this, (HomeController.__proto__ || Object.getPrototypeOf(HomeController)).apply(this, arguments));
   }
 
-  _createClass(HelloController, [{
-    key: 'toString',
-    value: function toString(callback) {
-      _nunjucks2.default.renderString('hello.html', getName(this.context), function (err, html) {
-        if (err) {
-          return callback(err, null);
-        }
-        callback(null, html);
-      });
-    }
-  }, {
+  _createClass(HomeController, [{
     key: 'index',
     value: function index(application, request, reply, callback) {
-      this.context.cookie.set('random', '_' + (Math.floor(Math.random() * 1000) + 1), { path: '/' });
-      callback(null);
+      if (!this.context.cookie.get('greeting')) {
+        this.context.cookie.set('greeting', '1', {
+          expires: 1000 * 60 * 60 * 24 * 365
+        });
+      }
+
+      return reply.redirect('/hello');
+    }
+  }, {
+    key: 'toString',
+    value: function toString(callback) {
+      callback(null, 'this is toppage');
     }
   }]);
 
-  return HelloController;
-}(_controller2.default);
+  return HomeController;
+}(_Controller3.default);
 
-exports.default = HelloController;
+exports.default = HomeController;

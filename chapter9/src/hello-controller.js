@@ -24,7 +24,7 @@ export default class HelloController extends Controller {
       }
       callback(null, html);
     });
-  },
+  }
   index(application, request, reply, callback) {
     this.context.cookie.set('random', '_' + (Math.floor(Math.random() * 1000) + 1), {path: '/'});
     callback(null);
